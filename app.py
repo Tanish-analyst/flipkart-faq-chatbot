@@ -222,10 +222,10 @@ if user_input := st.chat_input("Ask about Flipkart policies..."):
     #         response = rag_chain.invoke(user_input)
     #         st.markdown(f"<div style='background-color:#f0f0f0;padding:10px;border-radius:10px;'>{response}</div>", unsafe_allow_html=True)
 
-    with st.chat_message("assistant"):
-    with st.spinner("Thinking..."):
-        response = rag_chain.invoke(user_input)
-        st.markdown(response)
+with st.chat_message("assistant"):
+with st.spinner("Thinking..."):
+    response = rag_chain.invoke(user_input)
+    st.markdown(response)
 
     # Save assistant response
     st.session_state.messages.append({"role": "assistant", "content": response})
