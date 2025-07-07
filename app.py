@@ -195,9 +195,6 @@ with st.sidebar:
     st.markdown("---")
     st.markdown("🧠 Powered by LangChain + OpenAI")
 
-# 💡 Placeholder for first-time users
-if "messages" not in st.session_state or not st.session_state.messages:
-    st.info("💡 Try asking:\n- *How do I cancel an order?*\n- *What are SuperCoins?*")
 
 # 🧠 Store chat history
 if "messages" not in st.session_state:
