@@ -11,9 +11,6 @@ import os
 os.environ["OPENAI_API_KEY"] = st.secrets["OPENAI_API_KEY"]
 
 
-folder_path = "."  # Current directory
-index_name = "index"  # because files are: index.faiss and index.pkl
-
 def load_retriever():
     embeddings = OpenAIEmbeddings()
     vectorstore = FAISS.load_local(
@@ -36,7 +33,6 @@ retrieve_docs = RunnableLambda(retriever.invoke)
 
 
 
-# =============================   define this prompt very very cautiously, due to this it take me 1 hour to get desired results  =============================
 
 prompt = ChatPromptTemplate.from_template(
     """You are a Flipkart customer support assistant.
@@ -59,23 +55,6 @@ rag_chain = (
 
 
 
-# =============================     use this if you want to know about what going as context and question to LLM.  =============================
-
-
-
-# rag_chain = (
-#     {"context": retrieve_docs | format_docs, "question": RunnablePassthrough()}
-#     | RunnableLambda(lambda x: (
-#         st.code(f"📌 DEBUG CONTEXT:\n\n{x['context']}"),
-#         st.code(f"📌 DEBUG QUESTION:\n\n{x['question']}"),
-#         x
-#     )[-1])  # return original input
-#     | prompt
-#     | ChatOpenAI(model="gpt-3.5-turbo")
-#     | StrOutputParser()
-# )
-
-
 
 # =============================
 # 🎯 Streamlit ChatGPT-like UI
@@ -86,21 +65,6 @@ st.title("📦 Flipkart FAQ Chatbot")
 st.caption("Ask me anything about Flipkart policies!")
 
 
-# =============================     if you want to test the retriver, like what chunks it's retrieving based on question you providing in streamlit app  =============================
-# =============================     not required in making streamlit app, just for checking purpose  =============================
-query = st.text_input("Enter your question to test the retriever:")
-
-
-if query:
-    with st.spinner("Fetching relevant documents..."):
-        docs = retriever.get_relevant_documents(query)
-
-    st.subheader("📄 Retrieved Documents:")
-    for i, doc in enumerate(docs, 1):
-        st.markdown(f"**Document {i}:**")
-        st.code(doc.page_content)
-
-# =============================
 
 # 🧠 Store chat history
 if "messages" not in st.session_state:
