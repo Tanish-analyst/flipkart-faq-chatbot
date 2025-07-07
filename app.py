@@ -210,8 +210,11 @@ for msg in st.session_state.messages:
 if user_input := st.chat_input("Ask about Flipkart policies..."):
     # Show user message
     st.session_state.messages.append({"role": "user", "content": user_input})
-    with st.chat_message("user"):
-        st.markdown(f"<div style='background-color:#e1f5fe;padding:10px;border-radius:10px;'>{user_input}</div>", unsafe_allow_html=True)
+    st.markdown(f"""
+<div style='background-color:#e1f5fe;padding:10px;border-radius:10px;margin:10px 0;'>
+    👤 <b>You:</b><br>{user_input}
+</div>
+""", unsafe_allow_html=True)
 
     # Generate assistant response
     with st.chat_message("assistant"):
