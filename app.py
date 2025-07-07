@@ -17,9 +17,9 @@ index_name = "index"  # because files are: index.faiss and index.pkl
 def load_retriever():
     embeddings = OpenAIEmbeddings()
     vectorstore = FAISS.load_local(
-        folder_path=".",                   # Files are uploaded in the root directory
+        folder_path="index",                 
         embeddings=embeddings,
-        index_name="index",               # Because files are: index.faiss and index.pkl
+        index_name="index",            
         allow_dangerous_deserialization=True
     )
     return vectorstore.as_retriever(search_kwargs={"k": 2})
