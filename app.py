@@ -83,10 +83,10 @@
 #         st.markdown(user_input )
 
 #     # Bot response
-    with st.chat_message("assistant"):
-        with st.spinner("Thinking..."):
-            response = rag_chain.invoke(user_input)
-            st.markdown(response)
+    # with st.chat_message("assistant"):
+    #     with st.spinner("Thinking..."):
+    #         response = rag_chain.invoke(user_input)
+    #         st.markdown(response)
 
 #     # Save bot message
 #     st.session_state.messages.append({"role": "assistant", "content": response})
