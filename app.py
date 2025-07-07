@@ -76,7 +76,7 @@ for msg in st.session_state.messages:
         st.markdown(msg["content"])
 
 # Input box
-if prompt := st.chat_input("Ask about Flipkart policies..."):
+if user_input := st.chat_input("Ask about Flipkart policies..."):
     # Display user message
     st.session_state.messages.append({"role": "user", "content": prompt})
     with st.chat_message("user"):
@@ -85,7 +85,7 @@ if prompt := st.chat_input("Ask about Flipkart policies..."):
     # Bot response
     with st.chat_message("assistant"):
         with st.spinner("Thinking..."):
-            response = rag_chain.invoke(prompt)
+            response = rag_chain.invoke(user_input)
             st.markdown(response)
 
     # Save bot message
