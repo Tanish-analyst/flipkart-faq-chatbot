@@ -78,9 +78,9 @@ for msg in st.session_state.messages:
 # Input box
 if user_input := st.chat_input("Ask about Flipkart policies..."):
     # Display user message
-    st.session_state.messages.append({"role": "user", "content": prompt})
+    st.session_state.messages.append({"role": "user", "content": user_input })
     with st.chat_message("user"):
-        st.markdown(prompt)
+        st.markdown(user_input )
 
     # Bot response
     with st.chat_message("assistant"):
